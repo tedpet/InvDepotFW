@@ -20,3 +20,6 @@ When you first import this project, you may need to right click the project fold
     3. rm -rf womodular
 3. Check out and build this project in eclipse or on the command line.
     1. In eclipse, you should be able to right click on the Tests folder and Run as/Debug as JUnit Test.
+
+
+This is the framework for the InvDepot app
