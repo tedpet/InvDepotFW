@@ -1,0 +1,71 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "adress_line1"; 
+            name = adressLine1; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "adress_line2"; 
+            name = adressLine2; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "client_city"; 
+            name = clientCity; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "client_name"; 
+            name = clientName; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "client_post_code"; 
+            name = clientPostCode; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "client_state"; 
+            name = clientState; 
+            prototypeName = longText; 
+        }, 
+        {
+            columnName = current; 
+            externalType = bool; 
+            name = current; 
+            prototypeName = intBoolean; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (
+        adressLine1, 
+        adressLine2, 
+        clientCity, 
+        clientName, 
+        clientPostCode, 
+        clientState, 
+        current, 
+        id
+    ); 
+    className = "com.eltekfw.model.Client"; 
+    classProperties = (
+        adressLine1, 
+        adressLine2, 
+        clientCity, 
+        clientName, 
+        clientPostCode, 
+        clientState, 
+        current
+    ); 
+    externalName = client; 
+    fetchSpecificationDictionary = {}; 
+    name = Client; 
+    primaryKeyAttributes = (id); 
+}

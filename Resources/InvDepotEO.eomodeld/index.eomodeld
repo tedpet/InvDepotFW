@@ -1,0 +1,24 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {}; 
+    entities = (
+        {className = "com.eltekfw.model.Client"; name = Client; }, 
+        {className = "com.eltekfw.model.Invoice"; name = Invoice; }, 
+        {className = "com.eltekfw.model.Person"; name = Person; }, 
+        {className = "com.eltekfw.model.Preference"; name = Preference; }, 
+        {className = "com.eltekfw.model.SavedDoc"; name = SavedDoc; }, 
+        {className = "com.eltekfw.model.Security"; name = Security; }, 
+        {className = "com.eltekfw.model.Vendor"; name = Vendor; }
+    ); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = PostgreSQL; 
+            attributeNamingConvention = {case = Lower; separator = Underscore; }; 
+            databaseConfigs = {
+                PostgreSQL = {adaptorName = JDBC; prototypeEntityName = EOJDBCPostgresqlPrototypes; }; 
+            }; 
+            entityNamingConvention = {case = Lower; separator = Underscore; }; 
+        }; 
+    }; 
+}

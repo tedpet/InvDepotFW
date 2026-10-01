@@ -1,0 +1,38 @@
+{
+    attributes = (
+        {columnName = current; name = current; prototypeName = intBoolean; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = "job_number"; name = jobNumber; prototypeName = longText; }, 
+        {
+            allowsNull = N; 
+            columnName = "vendor_id"; 
+            name = vendorID; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (current, id, jobNumber, vendorID); 
+    className = "com.eltekfw.model.Invoice"; 
+    classProperties = (current, jobNumber, savedDocs, vendor); 
+    externalName = invoice; 
+    fetchSpecificationDictionary = {}; 
+    name = Invoice; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = SavedDoc; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = invoiceID; sourceAttribute = id; }); 
+            name = savedDocs; 
+        }, 
+        {
+            destination = Vendor; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = vendorID; }); 
+            name = vendor; 
+        }
+    ); 
+}

@@ -1,0 +1,49 @@
+{
+    attributes = (
+        {
+            columnName = current; 
+            externalType = bool; 
+            name = current; 
+            prototypeName = intBoolean; 
+        }, 
+        {columnName = "first_name"; name = firstName; prototypeName = longText; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = "last_name"; 
+            name = lastName; 
+            prototypeName = longText; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = "security_id"; 
+            name = securityID; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (current, firstName, id, lastName, securityID); 
+    className = "com.eltekfw.model.Person"; 
+    classProperties = (current, firstName, lastName, security, vendors); 
+    externalName = person; 
+    fetchSpecificationDictionary = {}; 
+    name = Person; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = Security; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = securityID; }); 
+            name = security; 
+        }, 
+        {
+            destination = Vendor; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = personID; sourceAttribute = id; }); 
+            name = vendors; 
+        }
+    ); 
+}

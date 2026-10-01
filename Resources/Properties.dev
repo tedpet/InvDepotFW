@@ -1,0 +1,13 @@
+#
+# InvDepotEO dev properties
+#
+
+
+# Connection Dictionary
+# dbConnectURLGLOBAL=jdbc:postgresql://192.168.1.68/aaa?capitalizeTypenames=true&zeroDateTimeBehavior=convertToNull
+dbConnectURLGLOBAL=jdbc:postgresql://localhost/aaa?capitalizeTypenames=true&zeroDateTimeBehavior=convertToNull
+ dbConnectUserGLOBAL=wouser
+ dbConnectPasswordGLOBAL=3368
+ dbConnectPluginGLOBAL=PostgresqlPlugIn
+ dbConnectDriverGLOBAL=org.postgresql.Driver
+ dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes

@@ -1,0 +1,43 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = "er_attachment_id"; 
+            name = erAttachmentID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = "invoice_id"; 
+            name = invoiceID; 
+            prototypeName = id; 
+        }, 
+        {columnName = "some_text"; name = someText; prototypeName = longText; }
+    ); 
+    attributesUsedForLocking = (erAttachmentID, id, invoiceID, someText); 
+    className = "com.eltekfw.model.SavedDoc"; 
+    classProperties = (anImage, invoice, someText); 
+    externalName = "saved_doc"; 
+    fetchSpecificationDictionary = {}; 
+    name = SavedDoc; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERAttachment; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = erAttachmentID; }); 
+            name = anImage; 
+        }, 
+        {
+            destination = Invoice; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = invoiceID; }); 
+            name = invoice; 
+        }
+    ); 
+}

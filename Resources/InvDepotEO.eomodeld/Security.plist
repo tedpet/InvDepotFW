@@ -1,0 +1,45 @@
+{
+    attributes = (
+        {
+            columnName = "approve_invoice"; 
+            externalType = bool; 
+            name = approveInvoice; 
+            prototypeName = intBoolean; 
+        }, 
+        {
+            columnName = "create_clients"; 
+            externalType = bool; 
+            name = createClients; 
+            prototypeName = intBoolean; 
+        }, 
+        {
+            columnName = "create_person"; 
+            externalType = bool; 
+            name = createPerson; 
+            prototypeName = intBoolean; 
+        }, 
+        {
+            columnName = "edit_clients"; 
+            externalType = bool; 
+            name = editClients; 
+            prototypeName = intBoolean; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (approveInvoice, createClients, createPerson, editClients, id); 
+    className = "com.eltekfw.model.Security"; 
+    classProperties = (approveInvoice, createClients, createPerson, editClients, persons); 
+    externalName = security; 
+    fetchSpecificationDictionary = {}; 
+    name = Security; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = Person; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = securityID; sourceAttribute = id; }); 
+            name = persons; 
+        }
+    ); 
+}

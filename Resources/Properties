@@ -1,0 +1,11 @@
+#
+# InvDepotEO prod properties
+#
+
+
+InvDepotEO.MigrationClassPrefix=com.eltekfw.migration.InvDepotEO
+er.migration.createTablesIfNecessary=true
+er.migration.migrateAtStartup=true
+
+er.migration.modelNames=ERAttachment,InvDepotEO
+

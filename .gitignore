@@ -1,0 +1,7 @@
+.settings
+.classpath
+/build/
+/bin/
+/target/
+/woproject/
+.DS_Store

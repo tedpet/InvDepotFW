@@ -1,0 +1,262 @@
+// DO NOT EDIT.  Make changes to com.eltekfw.model.Person.java instead.
+package com.eltekfw.model.eogen;
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.math.*;
+import java.util.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import er.extensions.eof.*;
+import er.extensions.foundation.*;
+
+@SuppressWarnings("all")
+public abstract class _Person extends  ERXGenericRecord {
+  public static final String ENTITY_NAME = "Person";
+
+  // Attribute Keys
+  public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
+  public static final ERXKey<String> FIRST_NAME = new ERXKey<String>("firstName");
+  public static final ERXKey<String> LAST_NAME = new ERXKey<String>("lastName");
+  // Relationship Keys
+  public static final ERXKey<com.eltekfw.model.Security> SECURITY = new ERXKey<com.eltekfw.model.Security>("security");
+  public static final ERXKey<com.eltekfw.model.Vendor> VENDORS = new ERXKey<com.eltekfw.model.Vendor>("vendors");
+
+  // Attributes
+  public static final String CURRENT_KEY = CURRENT.key();
+  public static final String FIRST_NAME_KEY = FIRST_NAME.key();
+  public static final String LAST_NAME_KEY = LAST_NAME.key();
+  // Relationships
+  public static final String SECURITY_KEY = SECURITY.key();
+  public static final String VENDORS_KEY = VENDORS.key();
+
+	private static final Logger LOG = LoggerFactory.getLogger(_Person.class);
+	
+  public com.eltekfw.model.Person localInstanceIn(EOEditingContext editingContext) {
+    com.eltekfw.model.Person localInstance = (com.eltekfw.model.Person)EOUtilities.localInstanceOfObject(editingContext, this);
+    if (localInstance == null) {
+      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+  public Boolean current() {
+    return (Boolean) storedValueForKey(_Person.CURRENT_KEY);
+  }
+
+  public void setCurrent(Boolean value) {
+	_Person.LOG.debug( "updating current from {} to {}", current(), value);
+	takeStoredValueForKey(value, _Person.CURRENT_KEY);
+  }
+
+  public String firstName() {
+    return (String) storedValueForKey(_Person.FIRST_NAME_KEY);
+  }
+
+  public void setFirstName(String value) {
+	_Person.LOG.debug( "updating firstName from {} to {}", firstName(), value);
+	takeStoredValueForKey(value, _Person.FIRST_NAME_KEY);
+  }
+
+  public String lastName() {
+    return (String) storedValueForKey(_Person.LAST_NAME_KEY);
+  }
+
+  public void setLastName(String value) {
+	_Person.LOG.debug( "updating lastName from {} to {}", lastName(), value);
+	takeStoredValueForKey(value, _Person.LAST_NAME_KEY);
+  }
+
+  public com.eltekfw.model.Security security() {
+    return (com.eltekfw.model.Security)storedValueForKey(_Person.SECURITY_KEY);
+  }
+  
+  public void setSecurity(com.eltekfw.model.Security value) {
+    takeStoredValueForKey(value, _Person.SECURITY_KEY);
+  }
+
+  public void setSecurityRelationship(com.eltekfw.model.Security value) {
+
+	  _Person.LOG.debug("updating security from {} to {}", security(), value);
+   
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setSecurity(value);
+    }
+    else if (value == null) {
+    	com.eltekfw.model.Security oldValue = security();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _Person.SECURITY_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _Person.SECURITY_KEY);
+    }
+  }
+  
+  public NSArray<com.eltekfw.model.Vendor> vendors() {
+    return (NSArray<com.eltekfw.model.Vendor>)storedValueForKey(_Person.VENDORS_KEY);
+  }
+
+  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier) {
+    return vendors(qualifier, null, false);
+  }
+
+  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier, boolean fetch) {
+    return vendors(qualifier, null, fetch);
+  }
+
+  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<com.eltekfw.model.Vendor> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(com.eltekfw.model.Vendor.PERSON_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = com.eltekfw.model.Vendor.fetchVendors(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = vendors();
+      if (qualifier != null) {
+        results = (NSArray<com.eltekfw.model.Vendor>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<com.eltekfw.model.Vendor>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToVendors(com.eltekfw.model.Vendor object) {
+    includeObjectIntoPropertyWithKey(object, _Person.VENDORS_KEY);
+  }
+
+  public void removeFromVendors(com.eltekfw.model.Vendor object) {
+    excludeObjectFromPropertyWithKey(object, _Person.VENDORS_KEY);
+  }
+
+  public void addToVendorsRelationship(com.eltekfw.model.Vendor object) {
+    
+    _Person.LOG.debug("adding {} to vendors relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToVendors(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
+    }
+  }
+
+  public void removeFromVendorsRelationship(com.eltekfw.model.Vendor object) {
+ 
+      _Person.LOG.debug("removing {} to vendors relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromVendors(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
+    }
+  }
+
+  public com.eltekfw.model.Vendor createVendorsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( com.eltekfw.model.Vendor.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _Person.VENDORS_KEY);
+    return (com.eltekfw.model.Vendor) eo;
+  }
+
+  public void deleteVendorsRelationship(com.eltekfw.model.Vendor object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllVendorsRelationships() {
+    Enumeration<com.eltekfw.model.Vendor> objects = vendors().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteVendorsRelationship(objects.nextElement());
+    }
+  }
+
+
+  public static com.eltekfw.model.Person createPerson(EOEditingContext editingContext, Boolean current
+, String firstName
+, com.eltekfw.model.Security security) {
+    com.eltekfw.model.Person eo = (com.eltekfw.model.Person) EOUtilities.createAndInsertInstance(editingContext, _Person.ENTITY_NAME);    
+		eo.setCurrent(current);
+		eo.setFirstName(firstName);
+    eo.setSecurityRelationship(security);
+    return eo;
+  }
+
+  public static ERXFetchSpecification<com.eltekfw.model.Person> fetchSpec() {
+    return new ERXFetchSpecification<com.eltekfw.model.Person>(_Person.ENTITY_NAME, null, null, false, true, null);
+  }
+
+  public static NSArray<com.eltekfw.model.Person> fetchAllPersons(EOEditingContext editingContext) {
+    return _Person.fetchAllPersons(editingContext, null);
+  }
+
+  public static NSArray<com.eltekfw.model.Person> fetchAllPersons(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
+    return _Person.fetchPersons(editingContext, null, sortOrderings);
+  }
+
+  public static NSArray<com.eltekfw.model.Person> fetchPersons(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    ERXFetchSpecification<com.eltekfw.model.Person> fetchSpec = new ERXFetchSpecification<com.eltekfw.model.Person>(_Person.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    NSArray<com.eltekfw.model.Person> eoObjects = fetchSpec.fetchObjects(editingContext);
+    return eoObjects;
+  }
+
+  public static com.eltekfw.model.Person fetchPerson(EOEditingContext editingContext, String keyName, Object value) {
+    return _Person.fetchPerson(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static com.eltekfw.model.Person fetchPerson(EOEditingContext editingContext, EOQualifier qualifier) {
+    NSArray<com.eltekfw.model.Person> eoObjects = _Person.fetchPersons(editingContext, qualifier, null);
+    com.eltekfw.model.Person eoObject;
+    int count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    }
+    else if (count == 1) {
+      eoObject = eoObjects.objectAtIndex(0);
+    }
+    else {
+      throw new IllegalStateException("There was more than one Person that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static com.eltekfw.model.Person fetchRequiredPerson(EOEditingContext editingContext, String keyName, Object value) {
+    return _Person.fetchRequiredPerson(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static com.eltekfw.model.Person fetchRequiredPerson(EOEditingContext editingContext, EOQualifier qualifier) {
+    com.eltekfw.model.Person eoObject = _Person.fetchPerson(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no Person that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static com.eltekfw.model.Person localInstanceIn(EOEditingContext editingContext, com.eltekfw.model.Person eo) {
+    com.eltekfw.model.Person localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+}

@@ -1,0 +1,12 @@
+ -destination Sources \
+ -extension java \
+ -java \
+ -javaTemplate _TPEntity.java \
+ -model Resources/InvDepotEO.eomodeld \
+ -packagedirs \
+ -subclassDestination Sources \
+ -subclassJavaTemplate TPEntity.java \
+ -templatedir EntityTemplates/tp/ \
+ -verbose \
+ -loadModelGroup \
+ -superclassPackage eogen

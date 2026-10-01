@@ -1,0 +1,18 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = "new_entity_id"; 
+            name = newEntityId; 
+            prototypeName = id; 
+        }, 
+        {columnName = quantity; name = quantity; prototypeName = intNumber; }
+    ); 
+    attributesUsedForLocking = (newEntityId, quantity); 
+    className = "com.eltekfw.model.NewEntity"; 
+    classProperties = (quantity); 
+    externalName = "new_entity"; 
+    fetchSpecificationDictionary = {}; 
+    name = NewEntity; 
+    primaryKeyAttributes = (newEntityId); 
+}
