@@ -12,4 +12,11 @@ module com.eltekfw.InvDepotFW {
 	requires org.wocommunity.webobjects.webobjects;
 	requires transitive org.wocommunity.wonder.erextensions;
 	requires org.wocommunity.wonder.erattachment;
+	requires org.apache.pdfbox;
+	requires org.apache.poi.poi;
+	requires org.apache.poi.ooxml;
+	requires org.apache.poi.scratchpad;
+	requires org.wocommunity.wonder.directtoweb;
+	requires org.wocommunity.webobjects.directtoweb;
+	requires java.desktop;
 }

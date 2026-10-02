@@ -3,7 +3,10 @@ package com.eltekfw.migration;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 
+import er.extensions.jdbc.ERXJDBCUtilities;
+import er.extensions.jdbc.ERXSQLHelper.ColumnIndex;
 import er.extensions.migration.ERXMigrationDatabase;
+import er.extensions.migration.ERXMigrationIndex;
 import er.extensions.migration.ERXMigrationTable;
 import er.extensions.migration.ERXModelVersion;
 
@@ -45,9 +48,18 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		personTable.newLargeStringColumn("first_name", NOT_NULL);
 		personTable.newIntegerColumn("id", NOT_NULL);
 		personTable.newLargeStringColumn("last_name", ALLOWS_NULL);
+		personTable.newLargeStringColumn("login_name", NOT_NULL);
+		personTable.newLargeStringColumn("password", NOT_NULL);
 		personTable.newIntegerColumn("security_id", NOT_NULL);
 		personTable.create();
 	 	personTable.setPrimaryKey("id");
+
+		ERXMigrationTable preferenceTable = database.newTableNamed("preference");
+		preferenceTable.newIntegerColumn("id", NOT_NULL);
+		preferenceTable.newLargeStringColumn("name", NOT_NULL);
+		preferenceTable.newLargeStringColumn("value", NOT_NULL);
+		preferenceTable.create();
+	 	preferenceTable.setPrimaryKey("id");
 
 		ERXMigrationTable savedDocTable = database.newTableNamed("saved_doc");
 		savedDocTable.newIntegerColumn("er_attachment_id", NOT_NULL);
@@ -80,5 +92,10 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		savedDocTable.addForeignKey("er_attachment_id", "ERAttachment", "id");
 		savedDocTable.addForeignKey("invoice_id", "invoice", "id");
 		vendorTable.addForeignKey("person_id", "person", "id");
+		
+		ERXJDBCUtilities.executeUpdateScriptFromResourceNamed(database.adaptorChannel(),
+				"Startup-" + ERXJDBCUtilities.databaseProductName(database.adaptorChannel()) + ".sql", "InvDepotEO");
+
 	}
 }
+		

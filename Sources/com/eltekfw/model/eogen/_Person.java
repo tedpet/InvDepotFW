@@ -21,6 +21,8 @@ public abstract class _Person extends  ERXGenericRecord {
   public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
   public static final ERXKey<String> FIRST_NAME = new ERXKey<String>("firstName");
   public static final ERXKey<String> LAST_NAME = new ERXKey<String>("lastName");
+  public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
+  public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   // Relationship Keys
   public static final ERXKey<com.eltekfw.model.Security> SECURITY = new ERXKey<com.eltekfw.model.Security>("security");
   public static final ERXKey<com.eltekfw.model.Vendor> VENDORS = new ERXKey<com.eltekfw.model.Vendor>("vendors");
@@ -29,6 +31,8 @@ public abstract class _Person extends  ERXGenericRecord {
   public static final String CURRENT_KEY = CURRENT.key();
   public static final String FIRST_NAME_KEY = FIRST_NAME.key();
   public static final String LAST_NAME_KEY = LAST_NAME.key();
+  public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
+  public static final String PASSWORD_KEY = PASSWORD.key();
   // Relationships
   public static final String SECURITY_KEY = SECURITY.key();
   public static final String VENDORS_KEY = VENDORS.key();
@@ -68,6 +72,24 @@ public abstract class _Person extends  ERXGenericRecord {
   public void setLastName(String value) {
 	_Person.LOG.debug( "updating lastName from {} to {}", lastName(), value);
 	takeStoredValueForKey(value, _Person.LAST_NAME_KEY);
+  }
+
+  public String loginName() {
+    return (String) storedValueForKey(_Person.LOGIN_NAME_KEY);
+  }
+
+  public void setLoginName(String value) {
+	_Person.LOG.debug( "updating loginName from {} to {}", loginName(), value);
+	takeStoredValueForKey(value, _Person.LOGIN_NAME_KEY);
+  }
+
+  public String password() {
+    return (String) storedValueForKey(_Person.PASSWORD_KEY);
+  }
+
+  public void setPassword(String value) {
+	_Person.LOG.debug( "updating password from {} to {}", password(), value);
+	takeStoredValueForKey(value, _Person.PASSWORD_KEY);
   }
 
   public com.eltekfw.model.Security security() {
@@ -192,10 +214,14 @@ public abstract class _Person extends  ERXGenericRecord {
 
   public static com.eltekfw.model.Person createPerson(EOEditingContext editingContext, Boolean current
 , String firstName
+, String loginName
+, String password
 , com.eltekfw.model.Security security) {
     com.eltekfw.model.Person eo = (com.eltekfw.model.Person) EOUtilities.createAndInsertInstance(editingContext, _Person.ENTITY_NAME);    
 		eo.setCurrent(current);
 		eo.setFirstName(firstName);
+		eo.setLoginName(loginName);
+		eo.setPassword(password);
     eo.setSecurityRelationship(security);
     return eo;
   }

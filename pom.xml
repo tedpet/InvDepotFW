@@ -77,7 +77,41 @@
 			<artifactId>testcontainers-junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.github.wocommunity.wonder.core</groupId>
+			<artifactId>erdirecttoweb</artifactId>
+			<version>8.0.3-SNAPSHOT</version>
+		</dependency>
+		
+          <!--            show images and .xls added old word docs        -->
+
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+	
+		
+		
 	</dependencies>
+	
+	
 	<build>
 		<sourceDirectory>Sources</sourceDirectory>
 		<testSourceDirectory>Tests</testSourceDirectory>

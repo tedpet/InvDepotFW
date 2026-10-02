@@ -14,6 +14,8 @@
             name = lastName; 
             prototypeName = longText; 
         }, 
+        {columnName = "login_name"; name = loginName; prototypeName = longText; }, 
+        {columnName = password; name = password; prototypeName = longText; }, 
         {
             allowsNull = N; 
             columnName = "security_id"; 
@@ -21,9 +23,9 @@
             prototypeName = id; 
         }
     ); 
-    attributesUsedForLocking = (current, firstName, id, lastName, securityID); 
+    attributesUsedForLocking = (current, firstName, id, lastName, loginName, password, securityID); 
     className = "com.eltekfw.model.Person"; 
-    classProperties = (current, firstName, lastName, security, vendors); 
+    classProperties = (current, firstName, lastName, loginName, password, security, vendors); 
     externalName = person; 
     fetchSpecificationDictionary = {}; 
     name = Person; 

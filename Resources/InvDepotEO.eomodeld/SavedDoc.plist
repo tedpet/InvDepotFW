@@ -24,6 +24,7 @@
     primaryKeyAttributes = (id); 
     relationships = (
         {
+            deleteRule = EODeleteRuleCascade; 
             destination = ERAttachment; 
             isMandatory = Y; 
             isToMany = N; 
