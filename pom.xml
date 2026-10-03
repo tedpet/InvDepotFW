@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.eltekfw</groupId>
 	<artifactId>InvDepotFW</artifactId>
@@ -48,6 +50,11 @@
 			<version>${wonder.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>io.github.wocommunity.wonder.businesslogic</groupId>
+			<artifactId>ercorebusinesslogic</artifactId>
+			<version>${wonder.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>io.github.wocommunity.wonder.plugins</groupId>
 			<artifactId>postgresqlplugin</artifactId>
 			<version>${wonder.version}</version>
@@ -82,8 +89,8 @@
 			<artifactId>erdirecttoweb</artifactId>
 			<version>8.0.3-SNAPSHOT</version>
 		</dependency>
-		
-          <!--            show images and .xls added old word docs        -->
+
+		<!--            show images and .xls added old word docs        -->
 
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
@@ -106,12 +113,25 @@
 			<artifactId>poi-scratchpad</artifactId>
 			<version>5.2.5</version>
 		</dependency>
-	
-		
-		
+
+		<!--            log4j Area                -->
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+			<version>2.26.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.26.0</version>
+		</dependency>
+
+
+
 	</dependencies>
-	
-	
+
+
 	<build>
 		<sourceDirectory>Sources</sourceDirectory>
 		<testSourceDirectory>Tests</testSourceDirectory>
@@ -145,7 +165,8 @@
 							<outputDirectory>${project.basedir}/Resources</outputDirectory>
 							<resources>
 								<resource>
-									<directory>${project.basedir}/FilteredResources</directory>
+									<directory>
+										${project.basedir}/FilteredResources</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>

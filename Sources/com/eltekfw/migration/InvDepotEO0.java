@@ -57,6 +57,7 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable preferenceTable = database.newTableNamed("preference");
 		preferenceTable.newIntegerColumn("id", NOT_NULL);
 		preferenceTable.newLargeStringColumn("name", NOT_NULL);
+		preferenceTable.newIntegerColumn("person_id", ALLOWS_NULL);
 		preferenceTable.newLargeStringColumn("value", NOT_NULL);
 		preferenceTable.create();
 	 	preferenceTable.setPrimaryKey("id");
@@ -89,13 +90,18 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 
 		invoiceTable.addForeignKey("vendor_id", "vendor", "id");
 		personTable.addForeignKey("security_id", "security", "id");
+		preferenceTable.addForeignKey("person_id", "person", "id");
 		savedDocTable.addForeignKey("er_attachment_id", "ERAttachment", "id");
 		savedDocTable.addForeignKey("invoice_id", "invoice", "id");
 		vendorTable.addForeignKey("person_id", "person", "id");
-		
+
+		ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
+			    "CREATE UNIQUE INDEX preference_name_user_uq ON preference (name, person_id)");
+			ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
+			    "CREATE UNIQUE INDEX preference_name_global_uq ON preference (name) WHERE person_id IS NULL");
+			
 		ERXJDBCUtilities.executeUpdateScriptFromResourceNamed(database.adaptorChannel(),
 				"Startup-" + ERXJDBCUtilities.databaseProductName(database.adaptorChannel()) + ".sql", "InvDepotEO");
 
 	}
 }
-		

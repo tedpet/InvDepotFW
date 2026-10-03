@@ -19,4 +19,5 @@ module com.eltekfw.InvDepotFW {
 	requires org.wocommunity.wonder.directtoweb;
 	requires org.wocommunity.webobjects.directtoweb;
 	requires java.desktop;
+	requires org.wocommunity.wonder.ercorebusinesslogic;
 }

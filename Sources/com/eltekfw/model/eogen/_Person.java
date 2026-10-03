@@ -24,6 +24,7 @@ public abstract class _Person extends  ERXGenericRecord {
   public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   // Relationship Keys
+  public static final ERXKey<com.eltekfw.model.Preference> PREFERENCES = new ERXKey<com.eltekfw.model.Preference>("preferences");
   public static final ERXKey<com.eltekfw.model.Security> SECURITY = new ERXKey<com.eltekfw.model.Security>("security");
   public static final ERXKey<com.eltekfw.model.Vendor> VENDORS = new ERXKey<com.eltekfw.model.Vendor>("vendors");
 
@@ -34,6 +35,7 @@ public abstract class _Person extends  ERXGenericRecord {
   public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
   public static final String PASSWORD_KEY = PASSWORD.key();
   // Relationships
+  public static final String PREFERENCES_KEY = PREFERENCES.key();
   public static final String SECURITY_KEY = SECURITY.key();
   public static final String VENDORS_KEY = VENDORS.key();
 
@@ -117,6 +119,99 @@ public abstract class _Person extends  ERXGenericRecord {
     }
   }
   
+  public NSArray<com.eltekfw.model.Preference> preferences() {
+    return (NSArray<com.eltekfw.model.Preference>)storedValueForKey(_Person.PREFERENCES_KEY);
+  }
+
+  public NSArray<com.eltekfw.model.Preference> preferences(EOQualifier qualifier) {
+    return preferences(qualifier, null, false);
+  }
+
+  public NSArray<com.eltekfw.model.Preference> preferences(EOQualifier qualifier, boolean fetch) {
+    return preferences(qualifier, null, fetch);
+  }
+
+  public NSArray<com.eltekfw.model.Preference> preferences(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<com.eltekfw.model.Preference> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(com.eltekfw.model.Preference.USER_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = com.eltekfw.model.Preference.fetchPreferences(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = preferences();
+      if (qualifier != null) {
+        results = (NSArray<com.eltekfw.model.Preference>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<com.eltekfw.model.Preference>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToPreferences(com.eltekfw.model.Preference object) {
+    includeObjectIntoPropertyWithKey(object, _Person.PREFERENCES_KEY);
+  }
+
+  public void removeFromPreferences(com.eltekfw.model.Preference object) {
+    excludeObjectFromPropertyWithKey(object, _Person.PREFERENCES_KEY);
+  }
+
+  public void addToPreferencesRelationship(com.eltekfw.model.Preference object) {
+    
+    _Person.LOG.debug("adding {} to preferences relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToPreferences(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _Person.PREFERENCES_KEY);
+    }
+  }
+
+  public void removeFromPreferencesRelationship(com.eltekfw.model.Preference object) {
+ 
+      _Person.LOG.debug("removing {} to preferences relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromPreferences(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.PREFERENCES_KEY);
+    }
+  }
+
+  public com.eltekfw.model.Preference createPreferencesRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( com.eltekfw.model.Preference.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _Person.PREFERENCES_KEY);
+    return (com.eltekfw.model.Preference) eo;
+  }
+
+  public void deletePreferencesRelationship(com.eltekfw.model.Preference object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.PREFERENCES_KEY);
+  }
+
+  public void deleteAllPreferencesRelationships() {
+    Enumeration<com.eltekfw.model.Preference> objects = preferences().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deletePreferencesRelationship(objects.nextElement());
+    }
+  }
+
   public NSArray<com.eltekfw.model.Vendor> vendors() {
     return (NSArray<com.eltekfw.model.Vendor>)storedValueForKey(_Person.VENDORS_KEY);
   }

@@ -21,11 +21,13 @@ public abstract class _Preference extends  ERXGenericRecord {
   public static final ERXKey<String> NAME = new ERXKey<String>("name");
   public static final ERXKey<String> VALUE = new ERXKey<String>("value");
   // Relationship Keys
+  public static final ERXKey<com.eltekfw.model.Person> USER = new ERXKey<com.eltekfw.model.Person>("user");
 
   // Attributes
   public static final String NAME_KEY = NAME.key();
   public static final String VALUE_KEY = VALUE.key();
   // Relationships
+  public static final String USER_KEY = USER.key();
 
 	private static final Logger LOG = LoggerFactory.getLogger(_Preference.class);
 	
@@ -55,6 +57,31 @@ public abstract class _Preference extends  ERXGenericRecord {
 	takeStoredValueForKey(value, _Preference.VALUE_KEY);
   }
 
+  public com.eltekfw.model.Person user() {
+    return (com.eltekfw.model.Person)storedValueForKey(_Preference.USER_KEY);
+  }
+  
+  public void setUser(com.eltekfw.model.Person value) {
+    takeStoredValueForKey(value, _Preference.USER_KEY);
+  }
+
+  public void setUserRelationship(com.eltekfw.model.Person value) {
+
+	  _Preference.LOG.debug("updating user from {} to {}", user(), value);
+   
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setUser(value);
+    }
+    else if (value == null) {
+    	com.eltekfw.model.Person oldValue = user();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _Preference.USER_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _Preference.USER_KEY);
+    }
+  }
+  
 
   public static com.eltekfw.model.Preference createPreference(EOEditingContext editingContext, String name
 , String value

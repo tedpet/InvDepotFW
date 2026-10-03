@@ -2,13 +2,29 @@
     attributes = (
         {allowsNull = N; name = id; prototypeName = id; }, 
         {columnName = name; name = name; prototypeName = longText; }, 
+        {
+            allowsNull = Y; 
+            columnName = "person_id"; 
+            name = personID; 
+            prototypeName = id; 
+        }, 
         {columnName = value; name = value; prototypeName = longText; }
     ); 
-    attributesUsedForLocking = (id, name, value); 
+    attributesUsedForLocking = (id, name, personID, value); 
     className = "com.eltekfw.model.Preference"; 
-    classProperties = (name, value); 
+    classProperties = (name, user, value); 
     externalName = preference; 
     fetchSpecificationDictionary = {}; 
     name = Preference; 
     primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = Person; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = personID; }); 
+            name = user; 
+        }
+    ); 
 }

@@ -1,11 +1,15 @@
 package com.eltekfw;
 
+import er.attachment.model.ERAttachment;
+import er.corebusinesslogic.ERCoreBusinessLogic;
 import er.extensions.ERXFrameworkPrincipal;
 
 public class InvDepotEO extends ERXFrameworkPrincipal {
 	protected static InvDepotEO sharedInstance;
 	@SuppressWarnings("unchecked")
-	public final static Class<? extends ERXFrameworkPrincipal> REQUIRES[] = new Class[] {};
+	public final static Class<? extends ERXFrameworkPrincipal> REQUIRES[] = new Class[] {
+			
+	};
 
 	static {
 		setUpFrameworkPrincipalClass(InvDepotEO.class);

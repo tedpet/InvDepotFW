@@ -25,12 +25,29 @@
     ); 
     attributesUsedForLocking = (current, firstName, id, lastName, loginName, password, securityID); 
     className = "com.eltekfw.model.Person"; 
-    classProperties = (current, firstName, lastName, loginName, password, security, vendors); 
+    classProperties = (
+        current, 
+        firstName, 
+        lastName, 
+        loginName, 
+        password, 
+        preferences, 
+        security, 
+        vendors
+    ); 
     externalName = person; 
     fetchSpecificationDictionary = {}; 
     name = Person; 
     primaryKeyAttributes = (id); 
     relationships = (
+        {
+            destination = Preference; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = personID; sourceAttribute = id; }); 
+            name = preferences; 
+            ownsDestination = Y; 
+        }, 
         {
             deleteRule = EODeleteRuleCascade; 
             destination = Security; 
