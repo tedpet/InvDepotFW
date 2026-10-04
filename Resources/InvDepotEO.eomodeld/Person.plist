@@ -1,10 +1,22 @@
 {
     attributes = (
         {
+            columnName = administrator; 
+            externalType = bool; 
+            name = administrator; 
+            prototypeName = intBoolean; 
+        }, 
+        {
             columnName = current; 
             externalType = bool; 
             name = current; 
             prototypeName = intBoolean; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "email_address"; 
+            name = emailAddress; 
+            prototypeName = longText; 
         }, 
         {columnName = "first_name"; name = firstName; prototypeName = longText; }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
@@ -17,20 +29,40 @@
         {columnName = "login_name"; name = loginName; prototypeName = longText; }, 
         {columnName = password; name = password; prototypeName = longText; }, 
         {
+            allowsNull = Y; 
+            columnName = "phone_number"; 
+            name = phoneNumber; 
+            prototypeName = longText; 
+        }, 
+        {
             allowsNull = N; 
             columnName = "security_id"; 
             name = securityID; 
             prototypeName = id; 
         }
     ); 
-    attributesUsedForLocking = (current, firstName, id, lastName, loginName, password, securityID); 
+    attributesUsedForLocking = (
+        administrator, 
+        current, 
+        emailAddress, 
+        firstName, 
+        id, 
+        lastName, 
+        loginName, 
+        password, 
+        phoneNumber, 
+        securityID
+    ); 
     className = "com.eltekfw.model.Person"; 
     classProperties = (
+        administrator, 
         current, 
+        emailAddress, 
         firstName, 
         lastName, 
         loginName, 
         password, 
+        phoneNumber, 
         preferences, 
         security, 
         vendors
