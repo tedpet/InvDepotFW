@@ -1,5 +1,9 @@
 package com.eltekfw.migration;
 
+import com.eltekfw.utilities.EltekUtilities;
+import com.webobjects.eoaccess.EOAdaptorChannel;
+import com.webobjects.eoaccess.EODatabaseContext;
+import com.webobjects.eoaccess.EOModel;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 
@@ -44,12 +48,15 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 	 	invoiceTable.setPrimaryKey("id");
 
 		ERXMigrationTable personTable = database.newTableNamed("person");
+		personTable.newFlagBooleanColumn("administrator", NOT_NULL);
 		personTable.newFlagBooleanColumn("current", NOT_NULL);
+		personTable.newLargeStringColumn("email_address", ALLOWS_NULL);
 		personTable.newLargeStringColumn("first_name", NOT_NULL);
 		personTable.newIntegerColumn("id", NOT_NULL);
 		personTable.newLargeStringColumn("last_name", ALLOWS_NULL);
 		personTable.newLargeStringColumn("login_name", NOT_NULL);
 		personTable.newLargeStringColumn("password", NOT_NULL);
+		personTable.newLargeStringColumn("phone_number", ALLOWS_NULL);
 		personTable.newIntegerColumn("security_id", NOT_NULL);
 		personTable.create();
 	 	personTable.setPrimaryKey("id");
@@ -82,6 +89,7 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable vendorTable = database.newTableNamed("vendor");
 		vendorTable.newFlagBooleanColumn("current", NOT_NULL);
 		vendorTable.newIntegerColumn("id", NOT_NULL);
+		vendorTable.newLargeStringColumn("login_name", NOT_NULL);
 		vendorTable.newLargeStringColumn("password", NOT_NULL);
 		vendorTable.newIntegerColumn("person_id", NOT_NULL);
 		vendorTable.newLargeStringColumn("vendor_name", NOT_NULL);
@@ -96,12 +104,14 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		vendorTable.addForeignKey("person_id", "person", "id");
 
 		ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
-			    "CREATE UNIQUE INDEX preference_name_user_uq ON preference (name, person_id)");
-			ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
-			    "CREATE UNIQUE INDEX preference_name_global_uq ON preference (name) WHERE person_id IS NULL");
-			
+				"CREATE UNIQUE INDEX preference_name_user_uq ON preference (name, person_id)");
+		ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
+				"CREATE UNIQUE INDEX preference_name_global_uq ON preference (name) WHERE person_id IS NULL");
+
 		ERXJDBCUtilities.executeUpdateScriptFromResourceNamed(database.adaptorChannel(),
 				"Startup-" + ERXJDBCUtilities.databaseProductName(database.adaptorChannel()) + ".sql", "InvDepotEO");
-
+	
 	}
+	
+
 }

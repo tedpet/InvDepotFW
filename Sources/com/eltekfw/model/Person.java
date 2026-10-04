@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import com.eltekfw.model.Security;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.foundation.NSValidation;
 import com.webobjects.foundation.NSMutableSet;
 
 import er.extensions.eof.ERXEC;
@@ -20,6 +21,7 @@ public class Person extends _Person {
 		super.init(ec);
 		log.debug("initializing a Person");
 		setCurrent(true);
+		setAdministrator(false);
 					// approveInvoice,    createClients,     createPerson,      editClients
 		
 		setSecurityRelationship(Security.createSecurity(ec, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE));
@@ -74,4 +76,34 @@ public class Person extends _Person {
 	        ec.dispose();
 	    }
 	}
+	
+	// SHA-512 base64 output is always exactly 88 characters. Values already
+	// at this length were pre-hashed (e.g. by the iOS API) and must not be
+	// hashed a second time.
+	private static final int HASHED_PASSWORD_LENGTH = 88;
+
+	@Override
+	public void willUpdate() {
+		super.willUpdate();
+
+		Object committed = committedSnapshotValueForKey(PASSWORD_KEY);
+		Object current   = valueForKey(PASSWORD_KEY);
+
+		if (current instanceof String) {
+			String currentStr = (String) current;
+			boolean changed    = !currentStr.equals(committed);
+			boolean preHashed  = currentStr.length() == HASHED_PASSWORD_LENGTH;
+			if (changed && !preHashed) {
+				takeStoredValueForKey(EltekUtilities.SHABase64String(currentStr), PASSWORD_KEY);
+			}
+		}
+	}
+
+	/** A login name must be unique across every Person and Vendor. */
+	@Override
+	public void validateForSave() throws NSValidation.ValidationException {
+		super.validateForSave();
+		LoginNameValidator.validateUnique(this, loginName());
+	}
+
 }

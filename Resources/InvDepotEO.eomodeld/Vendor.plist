@@ -7,6 +7,7 @@
             prototypeName = intBoolean; 
         }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = "login_name"; name = loginName; prototypeName = longText; }, 
         {columnName = password; name = password; prototypeName = longText; }, 
         {
             allowsNull = N; 
@@ -16,9 +17,9 @@
         }, 
         {columnName = "vendor_name"; name = vendorName; prototypeName = longText; }
     ); 
-    attributesUsedForLocking = (current, id, password, personID, vendorName); 
+    attributesUsedForLocking = (current, id, loginName, password, personID, vendorName); 
     className = "com.eltekfw.model.Vendor"; 
-    classProperties = (current, invoices, password, person, vendorName); 
+    classProperties = (current, invoices, loginName, password, person, vendorName); 
     externalName = vendor; 
     fetchSpecificationDictionary = {}; 
     name = Vendor; 

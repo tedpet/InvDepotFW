@@ -19,6 +19,7 @@ public abstract class _Vendor extends  ERXGenericRecord {
 
   // Attribute Keys
   public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
+  public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   public static final ERXKey<String> VENDOR_NAME = new ERXKey<String>("vendorName");
   // Relationship Keys
@@ -27,6 +28,7 @@ public abstract class _Vendor extends  ERXGenericRecord {
 
   // Attributes
   public static final String CURRENT_KEY = CURRENT.key();
+  public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
   public static final String PASSWORD_KEY = PASSWORD.key();
   public static final String VENDOR_NAME_KEY = VENDOR_NAME.key();
   // Relationships
@@ -50,6 +52,15 @@ public abstract class _Vendor extends  ERXGenericRecord {
   public void setCurrent(Boolean value) {
 	_Vendor.LOG.debug( "updating current from {} to {}", current(), value);
 	takeStoredValueForKey(value, _Vendor.CURRENT_KEY);
+  }
+
+  public String loginName() {
+    return (String) storedValueForKey(_Vendor.LOGIN_NAME_KEY);
+  }
+
+  public void setLoginName(String value) {
+	_Vendor.LOG.debug( "updating loginName from {} to {}", loginName(), value);
+	takeStoredValueForKey(value, _Vendor.LOGIN_NAME_KEY);
   }
 
   public String password() {
@@ -191,11 +202,13 @@ public abstract class _Vendor extends  ERXGenericRecord {
 
 
   public static com.eltekfw.model.Vendor createVendor(EOEditingContext editingContext, Boolean current
+, String loginName
 , String password
 , String vendorName
 , com.eltekfw.model.Person person) {
     com.eltekfw.model.Vendor eo = (com.eltekfw.model.Vendor) EOUtilities.createAndInsertInstance(editingContext, _Vendor.ENTITY_NAME);    
 		eo.setCurrent(current);
+		eo.setLoginName(loginName);
 		eo.setPassword(password);
 		eo.setVendorName(vendorName);
     eo.setPersonRelationship(person);

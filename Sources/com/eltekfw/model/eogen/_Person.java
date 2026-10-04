@@ -18,22 +18,28 @@ public abstract class _Person extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "Person";
 
   // Attribute Keys
+  public static final ERXKey<Boolean> ADMINISTRATOR = new ERXKey<Boolean>("administrator");
   public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
+  public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
   public static final ERXKey<String> FIRST_NAME = new ERXKey<String>("firstName");
   public static final ERXKey<String> LAST_NAME = new ERXKey<String>("lastName");
   public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
+  public static final ERXKey<String> PHONE_NUMBER = new ERXKey<String>("phoneNumber");
   // Relationship Keys
   public static final ERXKey<com.eltekfw.model.Preference> PREFERENCES = new ERXKey<com.eltekfw.model.Preference>("preferences");
   public static final ERXKey<com.eltekfw.model.Security> SECURITY = new ERXKey<com.eltekfw.model.Security>("security");
   public static final ERXKey<com.eltekfw.model.Vendor> VENDORS = new ERXKey<com.eltekfw.model.Vendor>("vendors");
 
   // Attributes
+  public static final String ADMINISTRATOR_KEY = ADMINISTRATOR.key();
   public static final String CURRENT_KEY = CURRENT.key();
+  public static final String EMAIL_ADDRESS_KEY = EMAIL_ADDRESS.key();
   public static final String FIRST_NAME_KEY = FIRST_NAME.key();
   public static final String LAST_NAME_KEY = LAST_NAME.key();
   public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
   public static final String PASSWORD_KEY = PASSWORD.key();
+  public static final String PHONE_NUMBER_KEY = PHONE_NUMBER.key();
   // Relationships
   public static final String PREFERENCES_KEY = PREFERENCES.key();
   public static final String SECURITY_KEY = SECURITY.key();
@@ -49,6 +55,15 @@ public abstract class _Person extends  ERXGenericRecord {
     return localInstance;
   }
 
+  public Boolean administrator() {
+    return (Boolean) storedValueForKey(_Person.ADMINISTRATOR_KEY);
+  }
+
+  public void setAdministrator(Boolean value) {
+	_Person.LOG.debug( "updating administrator from {} to {}", administrator(), value);
+	takeStoredValueForKey(value, _Person.ADMINISTRATOR_KEY);
+  }
+
   public Boolean current() {
     return (Boolean) storedValueForKey(_Person.CURRENT_KEY);
   }
@@ -56,6 +71,15 @@ public abstract class _Person extends  ERXGenericRecord {
   public void setCurrent(Boolean value) {
 	_Person.LOG.debug( "updating current from {} to {}", current(), value);
 	takeStoredValueForKey(value, _Person.CURRENT_KEY);
+  }
+
+  public String emailAddress() {
+    return (String) storedValueForKey(_Person.EMAIL_ADDRESS_KEY);
+  }
+
+  public void setEmailAddress(String value) {
+	_Person.LOG.debug( "updating emailAddress from {} to {}", emailAddress(), value);
+	takeStoredValueForKey(value, _Person.EMAIL_ADDRESS_KEY);
   }
 
   public String firstName() {
@@ -92,6 +116,15 @@ public abstract class _Person extends  ERXGenericRecord {
   public void setPassword(String value) {
 	_Person.LOG.debug( "updating password from {} to {}", password(), value);
 	takeStoredValueForKey(value, _Person.PASSWORD_KEY);
+  }
+
+  public String phoneNumber() {
+    return (String) storedValueForKey(_Person.PHONE_NUMBER_KEY);
+  }
+
+  public void setPhoneNumber(String value) {
+	_Person.LOG.debug( "updating phoneNumber from {} to {}", phoneNumber(), value);
+	takeStoredValueForKey(value, _Person.PHONE_NUMBER_KEY);
   }
 
   public com.eltekfw.model.Security security() {
@@ -307,12 +340,14 @@ public abstract class _Person extends  ERXGenericRecord {
   }
 
 
-  public static com.eltekfw.model.Person createPerson(EOEditingContext editingContext, Boolean current
+  public static com.eltekfw.model.Person createPerson(EOEditingContext editingContext, Boolean administrator
+, Boolean current
 , String firstName
 , String loginName
 , String password
 , com.eltekfw.model.Security security) {
     com.eltekfw.model.Person eo = (com.eltekfw.model.Person) EOUtilities.createAndInsertInstance(editingContext, _Person.ENTITY_NAME);    
+		eo.setAdministrator(administrator);
 		eo.setCurrent(current);
 		eo.setFirstName(firstName);
 		eo.setLoginName(loginName);
