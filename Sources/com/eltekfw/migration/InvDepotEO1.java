@@ -33,8 +33,12 @@ public class InvDepotEO1 extends Migration {
 
 		ERXJDBCUtilities.executeUpdate(
                 database.adaptorChannel(),
-                "UPDATE vendor set password = '" + EltekUtilities.SHABase64String("1234") + "' where id = '1'");
-		
+                "UPDATE vendor set password = '" + EltekUtilities.SHABase64String("1234") + "' where person_id = '3'");
+
+		ERXJDBCUtilities.executeUpdate(
+                database.adaptorChannel(),
+                "UPDATE vendor set password = '" + EltekUtilities.SHABase64String("1234") + "' where person_id = '1'");
+
 	}
 
 }

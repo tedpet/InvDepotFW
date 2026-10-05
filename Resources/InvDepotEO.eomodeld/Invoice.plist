@@ -1,8 +1,31 @@
 {
     attributes = (
-        {columnName = current; name = current; prototypeName = intBoolean; }, 
+        {columnName = approved; name = approved; prototypeName = intBoolean; }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
-        {columnName = "job_number"; name = jobNumber; prototypeName = longText; }, 
+        {
+            allowsNull = N; 
+            columnName = "insert_date"; 
+            name = insertDate; 
+            prototypeName = date; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "invoice_date"; 
+            name = invoiceDate; 
+            prototypeName = date; 
+        }, 
+        {
+            columnName = "invoice_number"; 
+            name = invoiceNumber; 
+            prototypeName = longText; 
+        }, 
+        {columnName = paid; name = paid; prototypeName = intBoolean; }, 
+        {
+            allowsNull = Y; 
+            columnName = "paid_date"; 
+            name = paidDate; 
+            prototypeName = date; 
+        }, 
         {
             allowsNull = N; 
             columnName = "vendor_id"; 
@@ -10,9 +33,36 @@
             prototypeName = id; 
         }
     ); 
-    attributesUsedForLocking = (current, id, jobNumber, vendorID); 
+    attributesUsedForLocking = (
+        approved, 
+        id, 
+        insertDate, 
+        invoiceDate, 
+        invoiceNumber, 
+        paid, 
+        paidDate, 
+        vendorID
+    ); 
     className = "com.eltekfw.model.Invoice"; 
-    classProperties = (current, jobNumber, savedDocs, vendor); 
+    classProperties = (
+        approved, 
+        insertDate, 
+        invoiceDate, 
+        invoiceNumber, 
+        paid, 
+        paidDate, 
+        savedDocs, 
+        vendor
+    ); 
+    entityIndexes = (
+        {
+            attributes = (invoiceNumber); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "invoiceNumber_idx"; 
+            order = asc; 
+        }
+    ); 
     externalName = invoice; 
     fetchSpecificationDictionary = {}; 
     name = Invoice; 

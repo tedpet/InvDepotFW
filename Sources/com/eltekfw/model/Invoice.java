@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import com.eltekfw.model.eogen._Invoice;
 
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSTimestamp;
+
+import er.extensions.foundation.ERXTimestampUtilities;
 
 public class Invoice extends _Invoice {
 	@SuppressWarnings("unused")
@@ -13,7 +16,13 @@ public class Invoice extends _Invoice {
 	public void init(EOEditingContext ec) {
 		super.init(ec);
 		LOG.debug("initializing an Invoice");
-		setCurrent(true);
+		setPaid(false);
+		setApproved(false);
+		setInvoiceDate(new NSTimestamp());
+		setInsertDate(new NSTimestamp());
+		
 		
 	}
+
+	
 }

@@ -12,7 +12,9 @@ INSERT INTO security (approve_invoice, create_clients, create_person, edit_clien
 
 INSERT INTO person (first_name, last_name, login_name, password, current, administrator, security_id) VALUES ('Sally', 'Anne', 'salann', '1234', true, false, 3);
 
-INSERT INTO vendor (vendor_name, password, current, login_name, person_id) VALUES ('A&P Tea Co.', '1234', true, '3368', 3);
+INSERT INTO vendor (vendor_name, password, current, login_name, person_id) VALUES ('A&P Tea Co.', '1234', true, 'billy', 3);
+INSERT INTO vendor (vendor_name, password, current, login_name, person_id) VALUES ('Number Two', '3368', true, 'no2', 1);
+INSERT INTO vendor (vendor_name, password, current, login_name, person_id) VALUES ('Number three', '3368', true, 'no3', 3);
 
 
 INSERT INTO preference (name, value) VALUES ('attachment.word.maxWidth', '300px');

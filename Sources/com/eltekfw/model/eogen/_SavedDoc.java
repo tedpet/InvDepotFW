@@ -18,12 +18,18 @@ public abstract class _SavedDoc extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "SavedDoc";
 
   // Attribute Keys
+  public static final ERXKey<java.math.BigDecimal> GROSS_AMOUNT = new ERXKey<java.math.BigDecimal>("grossAmount");
+  public static final ERXKey<Integer> QUANTITY = new ERXKey<Integer>("quantity");
+  public static final ERXKey<java.math.BigDecimal> SALES_TAX = new ERXKey<java.math.BigDecimal>("salesTax");
   public static final ERXKey<String> SOME_TEXT = new ERXKey<String>("someText");
   // Relationship Keys
   public static final ERXKey<er.attachment.model.ERAttachment> AN_IMAGE = new ERXKey<er.attachment.model.ERAttachment>("anImage");
   public static final ERXKey<com.eltekfw.model.Invoice> INVOICE = new ERXKey<com.eltekfw.model.Invoice>("invoice");
 
   // Attributes
+  public static final String GROSS_AMOUNT_KEY = GROSS_AMOUNT.key();
+  public static final String QUANTITY_KEY = QUANTITY.key();
+  public static final String SALES_TAX_KEY = SALES_TAX.key();
   public static final String SOME_TEXT_KEY = SOME_TEXT.key();
   // Relationships
   public static final String AN_IMAGE_KEY = AN_IMAGE.key();
@@ -37,6 +43,33 @@ public abstract class _SavedDoc extends  ERXGenericRecord {
       throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
     }
     return localInstance;
+  }
+
+  public java.math.BigDecimal grossAmount() {
+    return (java.math.BigDecimal) storedValueForKey(_SavedDoc.GROSS_AMOUNT_KEY);
+  }
+
+  public void setGrossAmount(java.math.BigDecimal value) {
+	_SavedDoc.LOG.debug( "updating grossAmount from {} to {}", grossAmount(), value);
+	takeStoredValueForKey(value, _SavedDoc.GROSS_AMOUNT_KEY);
+  }
+
+  public Integer quantity() {
+    return (Integer) storedValueForKey(_SavedDoc.QUANTITY_KEY);
+  }
+
+  public void setQuantity(Integer value) {
+	_SavedDoc.LOG.debug( "updating quantity from {} to {}", quantity(), value);
+	takeStoredValueForKey(value, _SavedDoc.QUANTITY_KEY);
+  }
+
+  public java.math.BigDecimal salesTax() {
+    return (java.math.BigDecimal) storedValueForKey(_SavedDoc.SALES_TAX_KEY);
+  }
+
+  public void setSalesTax(java.math.BigDecimal value) {
+	_SavedDoc.LOG.debug( "updating salesTax from {} to {}", salesTax(), value);
+	takeStoredValueForKey(value, _SavedDoc.SALES_TAX_KEY);
   }
 
   public String someText() {
@@ -99,9 +132,13 @@ public abstract class _SavedDoc extends  ERXGenericRecord {
   }
   
 
-  public static com.eltekfw.model.SavedDoc createSavedDoc(EOEditingContext editingContext, String someText
+  public static com.eltekfw.model.SavedDoc createSavedDoc(EOEditingContext editingContext, java.math.BigDecimal grossAmount
+, java.math.BigDecimal salesTax
+, String someText
 , er.attachment.model.ERAttachment anImage, com.eltekfw.model.Invoice invoice) {
     com.eltekfw.model.SavedDoc eo = (com.eltekfw.model.SavedDoc) EOUtilities.createAndInsertInstance(editingContext, _SavedDoc.ENTITY_NAME);    
+		eo.setGrossAmount(grossAmount);
+		eo.setSalesTax(salesTax);
 		eo.setSomeText(someText);
     eo.setAnImageRelationship(anImage);
     eo.setInvoiceRelationship(invoice);

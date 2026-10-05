@@ -18,15 +18,23 @@ public abstract class _Invoice extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "Invoice";
 
   // Attribute Keys
-  public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
-  public static final ERXKey<String> JOB_NUMBER = new ERXKey<String>("jobNumber");
+  public static final ERXKey<Boolean> APPROVED = new ERXKey<Boolean>("approved");
+  public static final ERXKey<NSTimestamp> INSERT_DATE = new ERXKey<NSTimestamp>("insertDate");
+  public static final ERXKey<NSTimestamp> INVOICE_DATE = new ERXKey<NSTimestamp>("invoiceDate");
+  public static final ERXKey<String> INVOICE_NUMBER = new ERXKey<String>("invoiceNumber");
+  public static final ERXKey<Boolean> PAID = new ERXKey<Boolean>("paid");
+  public static final ERXKey<NSTimestamp> PAID_DATE = new ERXKey<NSTimestamp>("paidDate");
   // Relationship Keys
   public static final ERXKey<com.eltekfw.model.SavedDoc> SAVED_DOCS = new ERXKey<com.eltekfw.model.SavedDoc>("savedDocs");
   public static final ERXKey<com.eltekfw.model.Vendor> VENDOR = new ERXKey<com.eltekfw.model.Vendor>("vendor");
 
   // Attributes
-  public static final String CURRENT_KEY = CURRENT.key();
-  public static final String JOB_NUMBER_KEY = JOB_NUMBER.key();
+  public static final String APPROVED_KEY = APPROVED.key();
+  public static final String INSERT_DATE_KEY = INSERT_DATE.key();
+  public static final String INVOICE_DATE_KEY = INVOICE_DATE.key();
+  public static final String INVOICE_NUMBER_KEY = INVOICE_NUMBER.key();
+  public static final String PAID_KEY = PAID.key();
+  public static final String PAID_DATE_KEY = PAID_DATE.key();
   // Relationships
   public static final String SAVED_DOCS_KEY = SAVED_DOCS.key();
   public static final String VENDOR_KEY = VENDOR.key();
@@ -41,22 +49,58 @@ public abstract class _Invoice extends  ERXGenericRecord {
     return localInstance;
   }
 
-  public Boolean current() {
-    return (Boolean) storedValueForKey(_Invoice.CURRENT_KEY);
+  public Boolean approved() {
+    return (Boolean) storedValueForKey(_Invoice.APPROVED_KEY);
   }
 
-  public void setCurrent(Boolean value) {
-	_Invoice.LOG.debug( "updating current from {} to {}", current(), value);
-	takeStoredValueForKey(value, _Invoice.CURRENT_KEY);
+  public void setApproved(Boolean value) {
+	_Invoice.LOG.debug( "updating approved from {} to {}", approved(), value);
+	takeStoredValueForKey(value, _Invoice.APPROVED_KEY);
   }
 
-  public String jobNumber() {
-    return (String) storedValueForKey(_Invoice.JOB_NUMBER_KEY);
+  public NSTimestamp insertDate() {
+    return (NSTimestamp) storedValueForKey(_Invoice.INSERT_DATE_KEY);
   }
 
-  public void setJobNumber(String value) {
-	_Invoice.LOG.debug( "updating jobNumber from {} to {}", jobNumber(), value);
-	takeStoredValueForKey(value, _Invoice.JOB_NUMBER_KEY);
+  public void setInsertDate(NSTimestamp value) {
+	_Invoice.LOG.debug( "updating insertDate from {} to {}", insertDate(), value);
+	takeStoredValueForKey(value, _Invoice.INSERT_DATE_KEY);
+  }
+
+  public NSTimestamp invoiceDate() {
+    return (NSTimestamp) storedValueForKey(_Invoice.INVOICE_DATE_KEY);
+  }
+
+  public void setInvoiceDate(NSTimestamp value) {
+	_Invoice.LOG.debug( "updating invoiceDate from {} to {}", invoiceDate(), value);
+	takeStoredValueForKey(value, _Invoice.INVOICE_DATE_KEY);
+  }
+
+  public String invoiceNumber() {
+    return (String) storedValueForKey(_Invoice.INVOICE_NUMBER_KEY);
+  }
+
+  public void setInvoiceNumber(String value) {
+	_Invoice.LOG.debug( "updating invoiceNumber from {} to {}", invoiceNumber(), value);
+	takeStoredValueForKey(value, _Invoice.INVOICE_NUMBER_KEY);
+  }
+
+  public Boolean paid() {
+    return (Boolean) storedValueForKey(_Invoice.PAID_KEY);
+  }
+
+  public void setPaid(Boolean value) {
+	_Invoice.LOG.debug( "updating paid from {} to {}", paid(), value);
+	takeStoredValueForKey(value, _Invoice.PAID_KEY);
+  }
+
+  public NSTimestamp paidDate() {
+    return (NSTimestamp) storedValueForKey(_Invoice.PAID_DATE_KEY);
+  }
+
+  public void setPaidDate(NSTimestamp value) {
+	_Invoice.LOG.debug( "updating paidDate from {} to {}", paidDate(), value);
+	takeStoredValueForKey(value, _Invoice.PAID_DATE_KEY);
   }
 
   public com.eltekfw.model.Vendor vendor() {
@@ -179,12 +223,16 @@ public abstract class _Invoice extends  ERXGenericRecord {
   }
 
 
-  public static com.eltekfw.model.Invoice createInvoice(EOEditingContext editingContext, Boolean current
-, String jobNumber
+  public static com.eltekfw.model.Invoice createInvoice(EOEditingContext editingContext, Boolean approved
+, NSTimestamp insertDate
+, String invoiceNumber
+, Boolean paid
 , com.eltekfw.model.Vendor vendor) {
     com.eltekfw.model.Invoice eo = (com.eltekfw.model.Invoice) EOUtilities.createAndInsertInstance(editingContext, _Invoice.ENTITY_NAME);    
-		eo.setCurrent(current);
-		eo.setJobNumber(jobNumber);
+		eo.setApproved(approved);
+		eo.setInsertDate(insertDate);
+		eo.setInvoiceNumber(invoiceNumber);
+		eo.setPaid(paid);
     eo.setVendorRelationship(vendor);
     return eo;
   }

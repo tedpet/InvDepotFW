@@ -6,6 +6,12 @@
             name = erAttachmentID; 
             prototypeName = id; 
         }, 
+        {
+            allowsNull = N; 
+            columnName = "gross_amount"; 
+            name = grossAmount; 
+            prototypeName = currencyAmount; 
+        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {
             allowsNull = N; 
@@ -13,11 +19,18 @@
             name = invoiceID; 
             prototypeName = id; 
         }, 
+        {
+            allowsNull = Y; 
+            columnName = quantity; 
+            name = quantity; 
+            prototypeName = intNumber; 
+        }, 
+        {columnName = "sales_tax"; name = salesTax; prototypeName = currencyAmount; }, 
         {columnName = "some_text"; name = someText; prototypeName = longText; }
     ); 
-    attributesUsedForLocking = (erAttachmentID, id, invoiceID, someText); 
+    attributesUsedForLocking = (erAttachmentID, grossAmount, id, invoiceID, quantity, salesTax, someText); 
     className = "com.eltekfw.model.SavedDoc"; 
-    classProperties = (anImage, invoice, someText); 
+    classProperties = (anImage, grossAmount, invoice, quantity, salesTax, someText); 
     externalName = "saved_doc"; 
     fetchSpecificationDictionary = {}; 
     name = SavedDoc; 

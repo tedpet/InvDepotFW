@@ -39,13 +39,22 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		clientTable.create();
 	 	clientTable.setPrimaryKey("id");
 
-		ERXMigrationTable invoiceTable = database.newTableNamed("invoice");
-		invoiceTable.newFlagBooleanColumn("current", NOT_NULL);
+	 	ERXMigrationTable invoiceTable = database.newTableNamed("invoice");
+		invoiceTable.newFlagBooleanColumn("approved", NOT_NULL);
 		invoiceTable.newIntegerColumn("id", NOT_NULL);
-		invoiceTable.newLargeStringColumn("job_number", NOT_NULL);
+		invoiceTable.newDateColumn("insert_date", NOT_NULL);
+		invoiceTable.newDateColumn("invoice_date", ALLOWS_NULL);
+		invoiceTable.newLargeStringColumn("invoice_number", NOT_NULL);
+		invoiceTable.newFlagBooleanColumn("paid", NOT_NULL);
+		invoiceTable.newDateColumn("paid_date", ALLOWS_NULL);
 		invoiceTable.newIntegerColumn("vendor_id", NOT_NULL);
 		invoiceTable.create();
 	 	invoiceTable.setPrimaryKey("id");
+	 	invoiceTable.addIndex(new ERXMigrationIndex(
+				"invoiceNumber_idx", true 
+				,new ColumnIndex("invoice_number")
+			));
+
 
 		ERXMigrationTable personTable = database.newTableNamed("person");
 		personTable.newFlagBooleanColumn("administrator", NOT_NULL);
@@ -69,13 +78,17 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		preferenceTable.create();
 	 	preferenceTable.setPrimaryKey("id");
 
-		ERXMigrationTable savedDocTable = database.newTableNamed("saved_doc");
+	 	ERXMigrationTable savedDocTable = database.newTableNamed("saved_doc");
 		savedDocTable.newIntegerColumn("er_attachment_id", NOT_NULL);
+		savedDocTable.newBigDecimalColumn("gross_amount", 38, 4, NOT_NULL);
 		savedDocTable.newIntegerColumn("id", NOT_NULL);
 		savedDocTable.newIntegerColumn("invoice_id", NOT_NULL);
+		savedDocTable.newIntegerColumn("quantity", ALLOWS_NULL);
+		savedDocTable.newBigDecimalColumn("sales_tax", 38, 4, NOT_NULL);
 		savedDocTable.newLargeStringColumn("some_text", NOT_NULL);
 		savedDocTable.create();
 	 	savedDocTable.setPrimaryKey("id");
+
 
 		ERXMigrationTable securityTable = database.newTableNamed("security");
 		securityTable.newFlagBooleanColumn("approve_invoice", NOT_NULL);
