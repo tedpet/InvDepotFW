@@ -19,6 +19,7 @@ public abstract class _Vendor extends  ERXGenericRecord {
 
   // Attribute Keys
   public static final ERXKey<Boolean> CURRENT = new ERXKey<Boolean>("current");
+  public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
   public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   public static final ERXKey<String> VENDOR_NAME = new ERXKey<String>("vendorName");
@@ -28,6 +29,7 @@ public abstract class _Vendor extends  ERXGenericRecord {
 
   // Attributes
   public static final String CURRENT_KEY = CURRENT.key();
+  public static final String EMAIL_ADDRESS_KEY = EMAIL_ADDRESS.key();
   public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
   public static final String PASSWORD_KEY = PASSWORD.key();
   public static final String VENDOR_NAME_KEY = VENDOR_NAME.key();
@@ -52,6 +54,15 @@ public abstract class _Vendor extends  ERXGenericRecord {
   public void setCurrent(Boolean value) {
 	_Vendor.LOG.debug( "updating current from {} to {}", current(), value);
 	takeStoredValueForKey(value, _Vendor.CURRENT_KEY);
+  }
+
+  public String emailAddress() {
+    return (String) storedValueForKey(_Vendor.EMAIL_ADDRESS_KEY);
+  }
+
+  public void setEmailAddress(String value) {
+	_Vendor.LOG.debug( "updating emailAddress from {} to {}", emailAddress(), value);
+	takeStoredValueForKey(value, _Vendor.EMAIL_ADDRESS_KEY);
   }
 
   public String loginName() {

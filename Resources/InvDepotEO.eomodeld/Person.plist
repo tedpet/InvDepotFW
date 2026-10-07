@@ -73,6 +73,15 @@
     primaryKeyAttributes = (id); 
     relationships = (
         {
+            deleteRule = EODeleteRuleCascade; 
+            destination = PersonVendor; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = personId; sourceAttribute = id; }); 
+            name = personVendors; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
             destination = Preference; 
             isToMany = Y; 
             joinSemantic = EOInnerJoin; 
@@ -89,12 +98,6 @@
             joins = ({destinationAttribute = id; sourceAttribute = securityID; }); 
             name = security; 
         }, 
-        {
-            destination = Vendor; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = personID; sourceAttribute = id; }); 
-            name = vendors; 
-        }
+        {definition = "personVendors.vendor"; name = vendors; }
     ); 
 }

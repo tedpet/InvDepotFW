@@ -6,6 +6,12 @@
             name = current; 
             prototypeName = intBoolean; 
         }, 
+        {
+            allowsNull = Y; 
+            columnName = "email_address"; 
+            name = emailAddress; 
+            prototypeName = longText; 
+        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {columnName = "login_name"; name = loginName; prototypeName = longText; }, 
         {columnName = password; name = password; prototypeName = longText; }, 
@@ -15,11 +21,35 @@
             name = personID; 
             prototypeName = id; 
         }, 
+        {
+            allowsNull = Y; 
+            columnName = "phone_number"; 
+            name = phoneNumber; 
+            prototypeName = longText; 
+        }, 
         {columnName = "vendor_name"; name = vendorName; prototypeName = longText; }
     ); 
-    attributesUsedForLocking = (current, id, loginName, password, personID, vendorName); 
+    attributesUsedForLocking = (
+        current, 
+        emailAddress, 
+        id, 
+        loginName, 
+        password, 
+        personID, 
+        phoneNumber, 
+        vendorName
+    ); 
     className = "com.eltekfw.model.Vendor"; 
-    classProperties = (current, invoices, loginName, password, person, vendorName); 
+    classProperties = (
+        current, 
+        emailAddress, 
+        invoices, 
+        loginName, 
+        password, 
+        persons, 
+        phoneNumber, 
+        vendorName
+    ); 
     externalName = vendor; 
     fetchSpecificationDictionary = {}; 
     name = Vendor; 
@@ -32,13 +62,15 @@
             joins = ({destinationAttribute = vendorID; sourceAttribute = id; }); 
             name = invoices; 
         }, 
+        {definition = "personVendors.person"; name = persons; }, 
         {
-            destination = Person; 
-            isMandatory = Y; 
-            isToMany = N; 
+            deleteRule = EODeleteRuleCascade; 
+            destination = PersonVendor; 
+            isToMany = Y; 
             joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = id; sourceAttribute = personID; }); 
-            name = person; 
+            joins = ({destinationAttribute = vendorId; sourceAttribute = id; }); 
+            name = personVendors; 
+            propagatesPrimaryKey = Y; 
         }
     ); 
 }

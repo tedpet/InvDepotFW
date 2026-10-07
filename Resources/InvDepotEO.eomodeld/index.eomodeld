@@ -6,6 +6,7 @@
         {className = "com.eltekfw.model.Client"; name = Client; }, 
         {className = "com.eltekfw.model.Invoice"; name = Invoice; }, 
         {className = "com.eltekfw.model.Person"; name = Person; }, 
+        {className = EOGenericRecord; name = PersonVendor; }, 
         {className = "com.eltekfw.model.Preference"; name = Preference; }, 
         {className = "com.eltekfw.model.SavedDoc"; name = SavedDoc; }, 
         {className = "com.eltekfw.model.Security"; name = Security; }, 

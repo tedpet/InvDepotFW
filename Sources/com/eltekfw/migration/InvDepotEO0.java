@@ -27,6 +27,7 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 
 	@Override
 	public void upgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
+		
 		ERXMigrationTable clientTable = database.newTableNamed("client");
 		clientTable.newLargeStringColumn("adress_line1", ALLOWS_NULL);
 		clientTable.newLargeStringColumn("adress_line2", ALLOWS_NULL);
@@ -39,7 +40,7 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		clientTable.create();
 	 	clientTable.setPrimaryKey("id");
 
-	 	ERXMigrationTable invoiceTable = database.newTableNamed("invoice");
+		ERXMigrationTable invoiceTable = database.newTableNamed("invoice");
 		invoiceTable.newFlagBooleanColumn("approved", NOT_NULL);
 		invoiceTable.newIntegerColumn("id", NOT_NULL);
 		invoiceTable.newDateColumn("insert_date", NOT_NULL);
@@ -50,11 +51,10 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		invoiceTable.newIntegerColumn("vendor_id", NOT_NULL);
 		invoiceTable.create();
 	 	invoiceTable.setPrimaryKey("id");
-	 	invoiceTable.addIndex(new ERXMigrationIndex(
-				"invoiceNumber_idx", true 
-				,new ColumnIndex("invoice_number")
-			));
-
+		invoiceTable.addIndex(new ERXMigrationIndex(
+			"invoiceNumber_idx", true 
+			,new ColumnIndex("invoice_number")
+		));
 
 		ERXMigrationTable personTable = database.newTableNamed("person");
 		personTable.newFlagBooleanColumn("administrator", NOT_NULL);
@@ -70,6 +70,12 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		personTable.create();
 	 	personTable.setPrimaryKey("id");
 
+		ERXMigrationTable personVendorTable = database.newTableNamed("person_vendor");
+		personVendorTable.newIntegerColumn("person_id", NOT_NULL);
+		personVendorTable.newIntegerColumn("vendor_id", NOT_NULL);
+		personVendorTable.create();
+	 	personVendorTable.setPrimaryKey("person_id", "vendor_id");
+
 		ERXMigrationTable preferenceTable = database.newTableNamed("preference");
 		preferenceTable.newIntegerColumn("id", NOT_NULL);
 		preferenceTable.newLargeStringColumn("name", NOT_NULL);
@@ -78,7 +84,7 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		preferenceTable.create();
 	 	preferenceTable.setPrimaryKey("id");
 
-	 	ERXMigrationTable savedDocTable = database.newTableNamed("saved_doc");
+		ERXMigrationTable savedDocTable = database.newTableNamed("saved_doc");
 		savedDocTable.newIntegerColumn("er_attachment_id", NOT_NULL);
 		savedDocTable.newBigDecimalColumn("gross_amount", 38, 4, NOT_NULL);
 		savedDocTable.newIntegerColumn("id", NOT_NULL);
@@ -88,7 +94,6 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 		savedDocTable.newLargeStringColumn("some_text", NOT_NULL);
 		savedDocTable.create();
 	 	savedDocTable.setPrimaryKey("id");
-
 
 		ERXMigrationTable securityTable = database.newTableNamed("security");
 		securityTable.newFlagBooleanColumn("approve_invoice", NOT_NULL);
@@ -101,20 +106,23 @@ public class InvDepotEO0 extends ERXMigrationDatabase.Migration {
 
 		ERXMigrationTable vendorTable = database.newTableNamed("vendor");
 		vendorTable.newFlagBooleanColumn("current", NOT_NULL);
+		vendorTable.newLargeStringColumn("email_address", ALLOWS_NULL);
 		vendorTable.newIntegerColumn("id", NOT_NULL);
 		vendorTable.newLargeStringColumn("login_name", NOT_NULL);
 		vendorTable.newLargeStringColumn("password", NOT_NULL);
 		vendorTable.newIntegerColumn("person_id", NOT_NULL);
+		vendorTable.newLargeStringColumn("phone_number", ALLOWS_NULL);
 		vendorTable.newLargeStringColumn("vendor_name", NOT_NULL);
 		vendorTable.create();
 	 	vendorTable.setPrimaryKey("id");
 
 		invoiceTable.addForeignKey("vendor_id", "vendor", "id");
 		personTable.addForeignKey("security_id", "security", "id");
+		personVendorTable.addForeignKey("person_id", "person", "id");
+		personVendorTable.addForeignKey("vendor_id", "vendor", "id");
 		preferenceTable.addForeignKey("person_id", "person", "id");
 		savedDocTable.addForeignKey("er_attachment_id", "ERAttachment", "id");
 		savedDocTable.addForeignKey("invoice_id", "invoice", "id");
-		vendorTable.addForeignKey("person_id", "person", "id");
 
 		ERXJDBCUtilities.executeUpdate(database.adaptorChannel(),
 				"CREATE UNIQUE INDEX preference_name_user_uq ON preference (name, person_id)");
