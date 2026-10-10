@@ -17,6 +17,7 @@
             activeDatabaseConfigName = PostgreSQL; 
             attributeNamingConvention = {case = Lower; separator = Underscore; }; 
             databaseConfigs = {
+                NewDatabaseConfig = {adaptorName = JDBC; }; 
                 PostgreSQL = {adaptorName = JDBC; prototypeEntityName = EOJDBCPostgresqlPrototypes; }; 
             }; 
             entityNamingConvention = {case = Lower; separator = Underscore; }; 

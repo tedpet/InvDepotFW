@@ -3,6 +3,7 @@ module com.eltekfw.InvDepotFW {
 	exports com.eltekfw.components;
 	exports com.eltekfw.model.eogen;
 	exports com.eltekfw.model;
+	exports com.eltekfw.migration;
 
 	requires org.slf4j;
 	requires org.wocommunity.webobjects.eoaccess;

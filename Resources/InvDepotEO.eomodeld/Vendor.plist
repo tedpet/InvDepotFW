@@ -52,10 +52,10 @@
     ); 
     entityIndexes = (
         {
-            attributes = (); 
+            attributes = (loginName); 
             constraint = distinct; 
             indexType = clustered; 
-            name = "loginName_unique"; 
+            name = "loginName_idx"; 
             order = asc; 
         }
     ); 
