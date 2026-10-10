@@ -29,7 +29,6 @@ public abstract class _Person extends  ERXGenericRecord {
   // Relationship Keys
   public static final ERXKey<com.eltekfw.model.Preference> PREFERENCES = new ERXKey<com.eltekfw.model.Preference>("preferences");
   public static final ERXKey<com.eltekfw.model.Security> SECURITY = new ERXKey<com.eltekfw.model.Security>("security");
-  public static final ERXKey<com.eltekfw.model.Vendor> VENDORS = new ERXKey<com.eltekfw.model.Vendor>("vendors");
 
   // Attributes
   public static final String ADMINISTRATOR_KEY = ADMINISTRATOR.key();
@@ -43,7 +42,6 @@ public abstract class _Person extends  ERXGenericRecord {
   // Relationships
   public static final String PREFERENCES_KEY = PREFERENCES.key();
   public static final String SECURITY_KEY = SECURITY.key();
-  public static final String VENDORS_KEY = VENDORS.key();
 
 	private static final Logger LOG = LoggerFactory.getLogger(_Person.class);
 	
@@ -242,100 +240,6 @@ public abstract class _Person extends  ERXGenericRecord {
     Enumeration<com.eltekfw.model.Preference> objects = preferences().immutableClone().objectEnumerator();
     while (objects.hasMoreElements()) {
       deletePreferencesRelationship(objects.nextElement());
-    }
-  }
-
-  public NSArray<com.eltekfw.model.Vendor> vendors() {
-    return (NSArray<com.eltekfw.model.Vendor>)storedValueForKey(_Person.VENDORS_KEY);
-  }
-
-  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier) {
-    return vendors(qualifier, null, false);
-  }
-
-  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier, boolean fetch) {
-    return vendors(qualifier, null, fetch);
-  }
-
-  public NSArray<com.eltekfw.model.Vendor> vendors(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
-    NSArray<com.eltekfw.model.Vendor> results;
-    if (fetch) {
-      EOQualifier fullQualifier;
-      EOQualifier inverseQualifier = new EOKeyValueQualifier(com.eltekfw.model.Vendor.PERSON_KEY, EOQualifier.QualifierOperatorEqual, this);
-    	
-      if (qualifier == null) {
-        fullQualifier = inverseQualifier;
-      }
-      else {
-        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
-        qualifiers.addObject(qualifier);
-        qualifiers.addObject(inverseQualifier);
-        fullQualifier = new EOAndQualifier(qualifiers);
-      }
-
-      results = com.eltekfw.model.Vendor.fetchVendors(editingContext(), fullQualifier, sortOrderings);
-    }
-    else {
-      results = vendors();
-      if (qualifier != null) {
-        results = (NSArray<com.eltekfw.model.Vendor>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
-      }
-      if (sortOrderings != null) {
-        results = (NSArray<com.eltekfw.model.Vendor>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
-      }
-    }
-    return results;
-  }
-  
-  public void addToVendors(com.eltekfw.model.Vendor object) {
-    includeObjectIntoPropertyWithKey(object, _Person.VENDORS_KEY);
-  }
-
-  public void removeFromVendors(com.eltekfw.model.Vendor object) {
-    excludeObjectFromPropertyWithKey(object, _Person.VENDORS_KEY);
-  }
-
-  public void addToVendorsRelationship(com.eltekfw.model.Vendor object) {
-    
-    _Person.LOG.debug("adding {} to vendors relationship", object);
-    
-    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
-    	addToVendors(object);
-    }
-    else {
-    	addObjectToBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
-    }
-  }
-
-  public void removeFromVendorsRelationship(com.eltekfw.model.Vendor object) {
- 
-      _Person.LOG.debug("removing {} to vendors relationship", object);
-    
-    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
-    	removeFromVendors(object);
-    }
-    else {
-    	removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
-    }
-  }
-
-  public com.eltekfw.model.Vendor createVendorsRelationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( com.eltekfw.model.Vendor.ENTITY_NAME );
-    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
-    editingContext().insertObject(eo);
-    addObjectToBothSidesOfRelationshipWithKey(eo, _Person.VENDORS_KEY);
-    return (com.eltekfw.model.Vendor) eo;
-  }
-
-  public void deleteVendorsRelationship(com.eltekfw.model.Vendor object) {
-    removeObjectFromBothSidesOfRelationshipWithKey(object, _Person.VENDORS_KEY);
-    editingContext().deleteObject(object);
-  }
-
-  public void deleteAllVendorsRelationships() {
-    Enumeration<com.eltekfw.model.Vendor> objects = vendors().immutableClone().objectEnumerator();
-    while (objects.hasMoreElements()) {
-      deleteVendorsRelationship(objects.nextElement());
     }
   }
 

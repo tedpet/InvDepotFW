@@ -1,7 +1,6 @@
 module com.eltekfw.InvDepotFW {
 	exports com.eltekfw;
 	exports com.eltekfw.components;
-	exports com.eltekfw.migration;
 	exports com.eltekfw.model.eogen;
 	exports com.eltekfw.model;
 

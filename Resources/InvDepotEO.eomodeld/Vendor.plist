@@ -50,6 +50,15 @@
         phoneNumber, 
         vendorName
     ); 
+    entityIndexes = (
+        {
+            attributes = (); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "loginName_unique"; 
+            order = asc; 
+        }
+    ); 
     externalName = vendor; 
     fetchSpecificationDictionary = {}; 
     name = Vendor; 

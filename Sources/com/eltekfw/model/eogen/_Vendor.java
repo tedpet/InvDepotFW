@@ -22,20 +22,22 @@ public abstract class _Vendor extends  ERXGenericRecord {
   public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
   public static final ERXKey<String> LOGIN_NAME = new ERXKey<String>("loginName");
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
+  public static final ERXKey<String> PHONE_NUMBER = new ERXKey<String>("phoneNumber");
   public static final ERXKey<String> VENDOR_NAME = new ERXKey<String>("vendorName");
   // Relationship Keys
   public static final ERXKey<com.eltekfw.model.Invoice> INVOICES = new ERXKey<com.eltekfw.model.Invoice>("invoices");
-  public static final ERXKey<com.eltekfw.model.Person> PERSON = new ERXKey<com.eltekfw.model.Person>("person");
+  public static final ERXKey<com.eltekfw.model.Person> PERSONS = new ERXKey<com.eltekfw.model.Person>("persons");
 
   // Attributes
   public static final String CURRENT_KEY = CURRENT.key();
   public static final String EMAIL_ADDRESS_KEY = EMAIL_ADDRESS.key();
   public static final String LOGIN_NAME_KEY = LOGIN_NAME.key();
   public static final String PASSWORD_KEY = PASSWORD.key();
+  public static final String PHONE_NUMBER_KEY = PHONE_NUMBER.key();
   public static final String VENDOR_NAME_KEY = VENDOR_NAME.key();
   // Relationships
   public static final String INVOICES_KEY = INVOICES.key();
-  public static final String PERSON_KEY = PERSON.key();
+  public static final String PERSONS_KEY = PERSONS.key();
 
 	private static final Logger LOG = LoggerFactory.getLogger(_Vendor.class);
 	
@@ -83,6 +85,15 @@ public abstract class _Vendor extends  ERXGenericRecord {
 	takeStoredValueForKey(value, _Vendor.PASSWORD_KEY);
   }
 
+  public String phoneNumber() {
+    return (String) storedValueForKey(_Vendor.PHONE_NUMBER_KEY);
+  }
+
+  public void setPhoneNumber(String value) {
+	_Vendor.LOG.debug( "updating phoneNumber from {} to {}", phoneNumber(), value);
+	takeStoredValueForKey(value, _Vendor.PHONE_NUMBER_KEY);
+  }
+
   public String vendorName() {
     return (String) storedValueForKey(_Vendor.VENDOR_NAME_KEY);
   }
@@ -92,31 +103,6 @@ public abstract class _Vendor extends  ERXGenericRecord {
 	takeStoredValueForKey(value, _Vendor.VENDOR_NAME_KEY);
   }
 
-  public com.eltekfw.model.Person person() {
-    return (com.eltekfw.model.Person)storedValueForKey(_Vendor.PERSON_KEY);
-  }
-  
-  public void setPerson(com.eltekfw.model.Person value) {
-    takeStoredValueForKey(value, _Vendor.PERSON_KEY);
-  }
-
-  public void setPersonRelationship(com.eltekfw.model.Person value) {
-
-	  _Vendor.LOG.debug("updating person from {} to {}", person(), value);
-   
-    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
-    	setPerson(value);
-    }
-    else if (value == null) {
-    	com.eltekfw.model.Person oldValue = person();
-    	if (oldValue != null) {
-    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _Vendor.PERSON_KEY);
-      }
-    } else {
-    	addObjectToBothSidesOfRelationshipWithKey(value, _Vendor.PERSON_KEY);
-    }
-  }
-  
   public NSArray<com.eltekfw.model.Invoice> invoices() {
     return (NSArray<com.eltekfw.model.Invoice>)storedValueForKey(_Vendor.INVOICES_KEY);
   }
@@ -211,18 +197,89 @@ public abstract class _Vendor extends  ERXGenericRecord {
     }
   }
 
+  public NSArray<com.eltekfw.model.Person> persons() {
+    return (NSArray<com.eltekfw.model.Person>)storedValueForKey(_Vendor.PERSONS_KEY);
+  }
+
+  public NSArray<com.eltekfw.model.Person> persons(EOQualifier qualifier) {
+    return persons(qualifier, null);
+  }
+
+  public NSArray<com.eltekfw.model.Person> persons(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<com.eltekfw.model.Person> results;
+      results = persons();
+      if (qualifier != null) {
+        results = (NSArray<com.eltekfw.model.Person>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<com.eltekfw.model.Person>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToPersons(com.eltekfw.model.Person object) {
+    includeObjectIntoPropertyWithKey(object, _Vendor.PERSONS_KEY);
+  }
+
+  public void removeFromPersons(com.eltekfw.model.Person object) {
+    excludeObjectFromPropertyWithKey(object, _Vendor.PERSONS_KEY);
+  }
+
+  public void addToPersonsRelationship(com.eltekfw.model.Person object) {
+    
+    _Vendor.LOG.debug("adding {} to persons relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToPersons(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _Vendor.PERSONS_KEY);
+    }
+  }
+
+  public void removeFromPersonsRelationship(com.eltekfw.model.Person object) {
+ 
+      _Vendor.LOG.debug("removing {} to persons relationship", object);
+    
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromPersons(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _Vendor.PERSONS_KEY);
+    }
+  }
+
+  public com.eltekfw.model.Person createPersonsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( com.eltekfw.model.Person.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _Vendor.PERSONS_KEY);
+    return (com.eltekfw.model.Person) eo;
+  }
+
+  public void deletePersonsRelationship(com.eltekfw.model.Person object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _Vendor.PERSONS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllPersonsRelationships() {
+    Enumeration<com.eltekfw.model.Person> objects = persons().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deletePersonsRelationship(objects.nextElement());
+    }
+  }
+
 
   public static com.eltekfw.model.Vendor createVendor(EOEditingContext editingContext, Boolean current
 , String loginName
 , String password
 , String vendorName
-, com.eltekfw.model.Person person) {
+) {
     com.eltekfw.model.Vendor eo = (com.eltekfw.model.Vendor) EOUtilities.createAndInsertInstance(editingContext, _Vendor.ENTITY_NAME);    
 		eo.setCurrent(current);
 		eo.setLoginName(loginName);
 		eo.setPassword(password);
 		eo.setVendorName(vendorName);
-    eo.setPersonRelationship(person);
     return eo;
   }
 

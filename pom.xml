@@ -29,7 +29,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.release>25</maven.compiler.release>
-		<wonder.version>8.0.3-SNAPSHOT</wonder.version>
+		<wonder.version>8.0.3</wonder.version>
 		<doclint>none</doclint>
 	</properties>
 	<dependencies>

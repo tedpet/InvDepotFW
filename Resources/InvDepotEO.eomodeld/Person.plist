@@ -18,16 +18,31 @@
             name = emailAddress; 
             prototypeName = longText; 
         }, 
-        {columnName = "first_name"; name = firstName; prototypeName = longText; }, 
-        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+        	columnName = "first_name";
+        	name = firstName; 
+			prototypeName = longText; }, 
+        {
+			allowsNull = N; 
+			name = id; 
+			prototypeName = id; 
+		}, 
         {
             allowsNull = Y; 
             columnName = "last_name"; 
             name = lastName; 
             prototypeName = longText; 
         }, 
-        {columnName = "login_name"; name = loginName; prototypeName = longText; }, 
-        {columnName = password; name = password; prototypeName = longText; }, 
+        {
+        	columnName = "login_name"; 
+        	name = loginName; 
+        	prototypeName = longText;
+        }, 
+        {
+        	columnName = password; 
+        	name = password; 
+        	prototypeName = longText; 
+        }, 
         {
             allowsNull = Y; 
             columnName = "phone_number"; 
@@ -64,9 +79,9 @@
         password, 
         phoneNumber, 
         preferences, 
-        security, 
-        vendors
+        security
     ); 
+
     externalName = person; 
     fetchSpecificationDictionary = {}; 
     name = Person; 
@@ -97,7 +112,6 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = securityID; }); 
             name = security; 
-        }, 
-        {definition = "personVendors.vendor"; name = vendors; }
+        }
     ); 
 }
